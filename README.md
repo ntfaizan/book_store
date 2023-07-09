@@ -1,4 +1,4 @@
-# json_placeholder
+# book_store_inventory
 
 A new Flutter project.
 
