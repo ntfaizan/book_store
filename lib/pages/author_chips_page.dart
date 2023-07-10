@@ -43,8 +43,7 @@ class _AuthorChipsPageState extends State<AuthorChipsPage> {
                 selected: authorList[index].isSelected,
                 onSelected: (bool selected) {
                   setState(() {
-                    authorList[index].isSelected =
-                        !authorList[index].isSelected;
+                    authorList[index].isSelected = selected;
                   });
                 },
                 selectedColor: Colors.amberAccent,

@@ -41,7 +41,7 @@ class _AuthorPageState extends State<AuthorPage> {
     if (mp['success']) {
       authorList = (mp['data'] as List)
           .map(
-            (map) => Author.fromJson(map),
+            (m) => Author.fromJson(m),
           )
           .toList();
       setState(() {});
