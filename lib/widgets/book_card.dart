@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../models/book_edition.dart';
+import '../models/book.dart';
 
 class BookCard extends StatelessWidget {
-  final BookEdition bookEdition;
+  final Book bookEdition;
   const BookCard({super.key, required this.bookEdition});
 
   @override
@@ -12,9 +12,6 @@ class BookCard extends StatelessWidget {
       child: Column(
         children: [
           Image.network(bookEdition.coverUrl),
-          Stack(
-            children: [],
-          ),
           Positioned(
             child: Text(bookEdition.edition),
           ),

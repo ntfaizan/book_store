@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:json_placeholder/models/book_edition.dart';
-import 'package:json_placeholder/widgets/book_card.dart';
+
+import '../models/book.dart';
 
 class BookEditionPage extends StatefulWidget {
   const BookEditionPage({super.key});
@@ -13,7 +13,7 @@ class BookEditionPage extends StatefulWidget {
 }
 
 class _BookEditionPageState extends State<BookEditionPage> {
-  List<BookEdition> bookEditionList = [];
+  List<Book> bookEditionList = [];
   final dio = Dio();
 
   @override
@@ -30,7 +30,7 @@ class _BookEditionPageState extends State<BookEditionPage> {
     Map<String, dynamic> mp = jsonDecode(res.toString());
     if (mp['success']) {
       bookEditionList =
-          (mp['data'] as List).map((e) => BookEdition.fromJson(e)).toList();
+          (mp['data'] as List).map((e) => Book.fromJson(e)).toList();
       setState(() {});
     }
   }

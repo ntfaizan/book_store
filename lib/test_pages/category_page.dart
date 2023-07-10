@@ -1,10 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:json_placeholder/network/network_client.dart';
+import 'package:json_placeholder/pages/home_page.dart';
 
 import '../models/category.dart';
-import 'book_page.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
@@ -34,8 +35,9 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Future<void> initData() async {
-    Map<String, dynamic> mp = await NetworkClient().get('api/categories');
-    if (mp['success']) {
+    final res = await NetworkClient().get('api/categories');
+    if (res.statusCode == 200) {
+      Map<String, dynamic> mp = json.decode(res.toString());
       categoryList = (mp['data'] as List)
           .map(
             (m) => Category.fromJson(m),
@@ -63,7 +65,7 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
               itemBuilder: (context, index) => InkWell(
                 onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const BookPage())),
+                    MaterialPageRoute(builder: (context) => const HomePage())),
                 child: Column(
                   children: [
                     Stack(

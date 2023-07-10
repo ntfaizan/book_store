@@ -53,12 +53,12 @@ class _AuthorChipsPageState extends State<AuthorChipsPage> {
           ),
           FilledButton(
             onPressed: () {
-              List<int> aList = authorList
-                  .where((e) => e.isSelected)
-                  .toList()
-                  .map((e) => e.id)
-                  .toList();
-              print(aList);
+              // List<int> aList = authorList
+              //     .where((e) => e.isSelected)
+              //     .toList()
+              //     .map((e) => e.id)
+              //     .toList();
+              // print(aList);
             },
             child: const Text('Submit'),
           )
