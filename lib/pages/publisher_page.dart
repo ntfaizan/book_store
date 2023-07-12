@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:json_placeholder/models/author.dart';
 import 'package:json_placeholder/models/publisher.dart';
-import 'package:json_placeholder/widgets/author_card.dart';
 import 'package:dio/dio.dart';
 import 'package:json_placeholder/widgets/publisher_card.dart';
 
