@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:json_placeholder/widgets/book_card.dart';
+import 'package:json_placeholder/widgets/home_drawer.dart';
 
 import '../models/book.dart';
 import '../network/network_client.dart';
@@ -51,48 +52,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          children: [
-            Padding(
-              padding: REdgeInsets.all(16.0),
-              child: Text(
-                'BSI NSSD',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14.sp,
-                ),
-              ),
-            ),
-            const Divider(
-              thickness: 1,
-            ),
-            const ListTile(
-              leading: Text('Main'),
-            ),
-            const ListTile(
-              leading: Icon(Icons.home_filled),
-              title: Text("Categories"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Books Library"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Book Settings"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.date_range),
-              title: Text("Your Cart"),
-            ),
-            const ListTile(
-              leading: Icon(Icons.date_range),
-              title: Text("Cart Checkout"),
-            ),
-          ],
-        ),
-      ),
+      drawer: const HomeDrawer(),
       appBar: AppBar(
         title: const Text('Books Library'),
         centerTitle: true,
@@ -115,115 +75,7 @@ class _HomePageState extends State<HomePage> {
                 if (index == nextPageCallAt) {
                   initData();
                 }
-                return Card(
-                  child: Padding(
-                    padding: REdgeInsets.all(12.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                          clipBehavior: Clip.hardEdge,
-                          child: Image.network(
-                            bookList[index].coverUrl,
-                            height: 111.h,
-                            width: 82.w,
-                          ),
-                        ),
-                        SizedBox(width: 29.w),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                bookList[index].title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                              SizedBox(height: 6.h),
-                              SizedBox(
-                                height: 15.h,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: bookList[index].authorList.length,
-                                  itemBuilder: (context, aIndex) => Text(
-                                    '${bookList[index].authorList[aIndex].name},',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 6.h),
-                              Text(
-                                bookList[index].publisher.name,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12.sp,
-                                ),
-                              ),
-                              SizedBox(height: 6.h),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    child: Padding(
-                                      padding: REdgeInsets.all(4.0),
-                                      child: Text(
-                                        bookList[index].edition,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12.sp,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    child: Padding(
-                                      padding: REdgeInsets.all(4.0),
-                                      child: Text(
-                                        '${bookList[index].unitPrice} ${bookList[index].unitCurrency}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12.sp,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.shopping_cart_checkout,
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                return BookCard(book: bookList[index]);
               },
             ),
     );

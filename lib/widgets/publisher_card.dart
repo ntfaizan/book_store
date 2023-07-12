@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../models/author.dart';
+import '../models/publisher.dart';
 
-class AuthorCard extends StatelessWidget {
-  final Author author;
-  const AuthorCard({super.key, required this.author});
+class PublisherCard extends StatelessWidget {
+  final Publisher publisher;
+  const PublisherCard({super.key, required this.publisher});
 
   @override
   Widget build(BuildContext context) {
@@ -13,15 +13,15 @@ class AuthorCard extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            child: Text(author.name[0]),
+            child: Text(publisher.name[0]),
           ),
           SizedBox(width: 29.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(author.name),
-              Text(author.createdAt),
-              Text(author.updatedAt),
+              Text(publisher.name),
+              Text(publisher.createdAt),
+              Text(publisher.updatedAt),
             ],
           ),
         ],

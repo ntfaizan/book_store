@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class Author {
   final int id;
   final String name;
@@ -16,7 +18,9 @@ class Author {
   factory Author.fromJson(Map<String, dynamic> mp) => Author(
         id: mp['id'],
         name: mp['name'],
-        createdAt: mp['created_at'],
-        updatedAt: mp['updated_at'],
+        createdAt: DateFormat("yy-MM-dd HH:mm:ss a")
+            .format(DateTime.parse(mp['created_at'])),
+        updatedAt: DateFormat("yy-MM-dd HH:mm:ss a")
+            .format(DateTime.parse(mp['updated_at'])),
       );
 }
