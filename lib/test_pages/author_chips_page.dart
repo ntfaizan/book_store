@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:json_placeholder/models/author.dart';
 import 'package:dio/dio.dart';
+
+import '../models/author.dart';
 
 class AuthorChipsPage extends StatefulWidget {
   const AuthorChipsPage({super.key});

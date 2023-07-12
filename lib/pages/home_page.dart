@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:json_placeholder/widgets/book_card.dart';
-import 'package:json_placeholder/widgets/home_drawer.dart';
 
 import '../models/book.dart';
 import '../network/network_client.dart';
+import '../widgets/book_card.dart';
+import '../widgets/home_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -32,13 +32,14 @@ class _HomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('No more books found')));
     } else {
+      nextPageCallAt - 1;
       final res =
           await NetworkClient().get('api/books?page=${currentPage + 1}');
       if (res.statusCode == 200) {
         Map<String, dynamic> mp = json.decode(res.toString());
         currentPage = mp['current_page'];
         nextPageUrl = mp['next_page_url'];
-        nextPageCallAt = mp['to'] - (mp['per_page'] ~/ 5);
+        nextPageCallAt = mp['to'] - 2;
         bookList.addAll((mp['data'] as List)
             .map(
               (m) => Book.fromJson(m),

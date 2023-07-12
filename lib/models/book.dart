@@ -1,5 +1,6 @@
-import 'package:json_placeholder/models/author.dart';
-import 'package:json_placeholder/models/publisher.dart';
+import 'package:book_store/models/publisher.dart';
+
+import 'author.dart';
 
 class Book {
   final int id;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:json_placeholder/pages/publisher_page.dart';
 
 import '../pages/author_page.dart';
 import '../pages/category_page.dart';
+import '../pages/publisher_page.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({super.key});

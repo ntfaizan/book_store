@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:json_placeholder/network/network_client.dart';
 
 import '../models/category.dart';
+import '../network/network_client.dart';
 
 class CategoryPage extends StatefulWidget {
   const CategoryPage({super.key});
