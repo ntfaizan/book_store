@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isLoading = true;
   int currentPage = 0;
   int nextPageCallAt = -1;
   String? nextPageUrl;
@@ -32,7 +31,6 @@ class _HomePageState extends State<HomePage> {
       ScaffoldMessenger.of(context)
           .showSnackBar(const SnackBar(content: Text('No more books found')));
     } else {
-      isLoading = true;
       final res =
           await NetworkClient().get('api/books?page=${currentPage + 1}');
       if (res.statusCode == 200) {
@@ -45,7 +43,6 @@ class _HomePageState extends State<HomePage> {
               (m) => Book.fromJson(m),
             )
             .toList());
-        isLoading = false;
         setState(() {});
       }
     }
@@ -110,7 +107,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: isLoading
+      body: bookList.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: bookList.length,

@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:json_placeholder/network/network_client.dart';
-import 'package:json_placeholder/pages/home_page.dart';
 
 import '../models/category.dart';
 
@@ -58,29 +57,19 @@ class _CategoryPageState extends State<CategoryPage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : GridView.builder(
+          : ListView.builder(
               itemCount: categoryList.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
-              itemBuilder: (context, index) => InkWell(
-                onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const HomePage())),
-                child: Column(
+              itemBuilder: (context, index) => Card(
+                child: Row(
                   children: [
-                    Stack(
+                    Image.asset(
+                      coverList[random.nextInt(7)],
+                    ),
+                    Column(
                       children: [
-                        Image.asset(
-                          coverList[random.nextInt(7)],
-                        ),
-                        Positioned(
-                          top: 17,
-                          right: 17,
-                          child: Text(
-                            categoryList[index].name,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                        )
+                        Text(categoryList[index].name),
+                        Text(categoryList[index].createdAt),
+                        Text(categoryList[index].updatedAt),
                       ],
                     ),
                   ],
@@ -89,4 +78,10 @@ class _CategoryPageState extends State<CategoryPage> {
             ),
     );
   }
+
+  // String datetimeFormat(String datetime) {
+  //   // DateTime dt1 = DateTime.parse(datetime);
+  //   // return DateFormat("EEE, d MMM yyyy HH:mm:ss").format(dt1);
+  //   return DateFormat("yy-MM-dd HH:mm:ss a").format(DateTime.parse(datetime));
+  // }
 }
