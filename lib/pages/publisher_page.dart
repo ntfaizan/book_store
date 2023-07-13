@@ -24,7 +24,7 @@ class _PublisherPageState extends State<PublisherPage> {
 
   Future<void> initData() async {
     final response = await NetworkClient()
-        .get('http://mad.codewithfaizan.com/api/publishers');
+        .get('api/publishers');
     Map<String, dynamic> mp = json.decode(response.toString());
     if (response.statusCode == 200) {
       publisherList = (mp['data'] as List)

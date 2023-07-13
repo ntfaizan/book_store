@@ -8,4 +8,8 @@ class NetworkClient {
       [Map<String, dynamic>? queryParameters]) async {
     return await dio.get(baseUrl + url, queryParameters: queryParameters);
   }
+
+  Future<Response> delete(String url, int urlParameter) async {
+    return await dio.delete('$baseUrl$url$urlParameter');
+  }
 }

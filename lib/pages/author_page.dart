@@ -24,7 +24,7 @@ class _AuthorPageState extends State<AuthorPage> {
 
   Future<void> initData() async {
     final response =
-        await NetworkClient().get('http://mad.codewithfaizan.com/api/authors');
+        await NetworkClient().get('api/authors');
     Map<String, dynamic> mp = json.decode(response.toString());
     if (response.statusCode == 200) {
       authorList = (mp['data'] as List)
