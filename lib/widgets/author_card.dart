@@ -6,7 +6,8 @@ import '../models/author.dart';
 
 class AuthorCard extends StatelessWidget {
   final Author author;
-  const AuthorCard({super.key, required this.author});
+  final Function deleteData;
+  const AuthorCard({super.key, required this.author, required this.deleteData});
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +47,7 @@ class AuthorCard extends StatelessWidget {
                       final res = await NetworkClient()
                           .delete('api/authors/', author.id);
                       if (res.statusCode == 200) {
+                        deleteData(author.id);
                         // ignore: use_build_context_synchronously
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(

@@ -23,8 +23,7 @@ class _AuthorPageState extends State<AuthorPage> {
   }
 
   Future<void> initData() async {
-    final response =
-        await NetworkClient().get('api/authors');
+    final response = await NetworkClient().get('api/authors');
     Map<String, dynamic> mp = json.decode(response.toString());
     if (response.statusCode == 200) {
       authorList = (mp['data'] as List)
@@ -36,6 +35,11 @@ class _AuthorPageState extends State<AuthorPage> {
     }
   }
 
+  void deleteData(int id) {
+    authorList.removeWhere((author) => author.id == id);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +48,8 @@ class _AuthorPageState extends State<AuthorPage> {
       ),
       body: ListView.builder(
         itemCount: authorList.length,
-        itemBuilder: (context, index) => AuthorCard(author: authorList[index]),
+        itemBuilder: (context, index) =>
+            AuthorCard(author: authorList[index], deleteData: deleteData),
       ),
     );
   }
