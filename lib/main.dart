@@ -1,3 +1,4 @@
+import 'package:book_store/pages/author_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           // useMaterial3: true,
         ),
-        home: const HomePage(),
+        // home: const HomePage(),
+        home: const AuthorPage(),
       ),
     );
   }

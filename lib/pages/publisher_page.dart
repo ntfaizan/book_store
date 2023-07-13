@@ -23,8 +23,7 @@ class _PublisherPageState extends State<PublisherPage> {
   }
 
   Future<void> initData() async {
-    final response = await NetworkClient()
-        .get('api/publishers');
+    final response = await NetworkClient().get('api/publishers');
     Map<String, dynamic> mp = json.decode(response.toString());
     if (response.statusCode == 200) {
       publisherList = (mp['data'] as List)
@@ -36,6 +35,11 @@ class _PublisherPageState extends State<PublisherPage> {
     }
   }
 
+  void deleteData(int id) {
+    publisherList.removeWhere((e) => e.id == id);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +48,10 @@ class _PublisherPageState extends State<PublisherPage> {
       ),
       body: ListView.builder(
         itemCount: publisherList.length,
-        itemBuilder: (context, index) =>
-            PublisherCard(publisher: publisherList[index]),
+        itemBuilder: (context, index) => PublisherCard(
+          publisher: publisherList[index],
+          deleteData: deleteData,
+        ),
       ),
     );
   }

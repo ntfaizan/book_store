@@ -36,7 +36,7 @@ class _AuthorPageState extends State<AuthorPage> {
   }
 
   void deleteData(int id) {
-    authorList.removeWhere((author) => author.id == id);
+    authorList.removeWhere((e) => e.id == id);
     setState(() {});
   }
 
@@ -46,11 +46,15 @@ class _AuthorPageState extends State<AuthorPage> {
       appBar: AppBar(
         title: const Text('Author Page'),
       ),
-      body: ListView.builder(
-        itemCount: authorList.length,
-        itemBuilder: (context, index) =>
-            AuthorCard(author: authorList[index], deleteData: deleteData),
-      ),
+      body: authorList.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: authorList.length,
+              itemBuilder: (context, index) => AuthorCard(
+                author: authorList[index],
+                deleteData: deleteData,
+              ),
+            ),
     );
   }
 }

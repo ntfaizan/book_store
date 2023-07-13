@@ -1,6 +1,7 @@
 import 'package:book_store/network/network_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 
 import '../models/author.dart';
 
@@ -14,9 +15,11 @@ class AuthorCard extends StatelessWidget {
     return Card(
       child: Row(
         children: [
-          CircleAvatar(
-            // child: Text(author.name[0]),
-            child: Text('${author.id}'),
+          Lottie.asset(
+            'assets/svgs/books.json',
+            repeat: false,
+            height: 111.h,
+            width: 82.w,
           ),
           SizedBox(width: 29.w),
           Column(
@@ -24,10 +27,9 @@ class AuthorCard extends StatelessWidget {
             children: [
               Text(author.name),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(author.createdAt),
-                  const SizedBox(width: 40),
+                  Text('Created At: ${author.createdAt}'),
                   IconButton(
                     onPressed: () {},
                     icon: Icon(
@@ -40,8 +42,7 @@ class AuthorCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(author.updatedAt),
-                  const SizedBox(width: 40),
+                  Text('Updated At: ${author.updatedAt}'),
                   IconButton(
                     onPressed: () async {
                       final res = await NetworkClient()
