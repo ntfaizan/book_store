@@ -30,7 +30,7 @@ class HomeDrawer extends StatelessWidget {
             leading: Text('Main'),
           ),
           ListTile(
-            leading: const Icon(Icons.home_filled),
+            leading: const Icon(Icons.category),
             title: const Text("Categories"),
             onTap: () => Navigator.of(context).push(
               MaterialPageRoute(

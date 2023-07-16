@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:book_store/utils/utility.dart';
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
@@ -22,15 +23,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    bookList.clear();
     initData();
     super.initState();
   }
 
   Future<void> initData() async {
+    bookList.clear();
+    setState(() {});
     if (currentPage > 0 && nextPageUrl == null) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('No more books found')));
+      Utility.showMessage(context, 'No more books found');
     } else {
       nextPageCallAt - 1;
       final res =

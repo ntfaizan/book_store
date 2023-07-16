@@ -4,12 +4,36 @@ class NetworkClient {
   final dio = Dio();
   static const baseUrl = 'http://mad.codewithfaizan.com/';
 
-  Future<Response> get(String url,
-      [Map<String, dynamic>? queryParameters]) async {
-    return await dio.get(baseUrl + url, queryParameters: queryParameters);
+  NetworkClient() {
+    dio.interceptors.add(
+      LogInterceptor(
+        requestBody: true,
+        error: true,
+        request: false,
+        requestHeader: false,
+        responseBody: true,
+        responseHeader: false,
+      ),
+    );
   }
 
-  Future<Response> delete(String url, int urlParameter) async {
-    return await dio.delete('$baseUrl$url$urlParameter');
+  Future<Response> get(String path,
+      {Map<String, dynamic>? queryParameters}) async {
+    return await dio.get(baseUrl + path, queryParameters: queryParameters);
+  }
+
+  Future<Response> delete(String path,
+      {Map<String, dynamic>? queryParameters}) async {
+    return await dio.delete('$baseUrl$path', queryParameters: queryParameters);
+  }
+
+  Future<Response> put(String path,
+      {Map<String, dynamic>? queryParameters}) async {
+    return await dio.put('$baseUrl$path', queryParameters: queryParameters);
+  }
+
+  Future<Response> post(String path,
+      {Map<String, dynamic>? queryParameters}) async {
+    return await dio.post('$baseUrl$path', queryParameters: queryParameters);
   }
 }

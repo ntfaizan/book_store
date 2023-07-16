@@ -1,14 +1,16 @@
-import 'package:book_store/network/network_client.dart';
+import 'package:book_store/utils/utility.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
 import '../models/author.dart';
+import '../network/network_client.dart';
+import '../pages/author_edit_page.dart';
 
 class AuthorCard extends StatelessWidget {
   final Author author;
-  final Function deleteData;
-  const AuthorCard({super.key, required this.author, required this.deleteData});
+  final Function initData;
+  const AuthorCard({super.key, required this.author, required this.initData});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,12 @@ class AuthorCard extends StatelessWidget {
                 children: [
                   Text('Created At: ${author.createdAt}'),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            AuthorEditPage(author: author, initData: initData),
+                      ));
+                    },
                     icon: Icon(
                       Icons.edit,
                       color: Theme.of(context).colorScheme.primary,
@@ -46,16 +53,12 @@ class AuthorCard extends StatelessWidget {
                   IconButton(
                     onPressed: () async {
                       final res = await NetworkClient()
-                          .delete('api/authors/', author.id);
+                          .delete('api/authors/${author.id}');
                       if (res.statusCode == 200) {
-                        deleteData(author.id);
+                        initData();
                         // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(
-                                'Author: ${author.id} successfully deleted'),
-                          ),
-                        );
+                        Utility.showMessage(context,
+                            'Author: ${author.id} successfully deleted');
                       }
                     },
                     icon: Icon(

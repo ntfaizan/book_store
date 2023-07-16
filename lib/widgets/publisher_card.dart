@@ -5,9 +5,9 @@ import '../models/publisher.dart';
 
 class PublisherCard extends StatelessWidget {
   final Publisher publisher;
-  final Function deleteData;
+  final Function initData;
   const PublisherCard(
-      {super.key, required this.publisher, required this.deleteData});
+      {super.key, required this.publisher, required this.initData});
 
   @override
   Widget build(BuildContext context) {

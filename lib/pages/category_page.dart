@@ -34,6 +34,8 @@ class _CategoryPageState extends State<CategoryPage> {
   }
 
   Future<void> initData() async {
+    categoryList.clear();
+    setState(() {});
     final res = await NetworkClient().get('api/categories');
     if (res.statusCode == 200) {
       Map<String, dynamic> mp = json.decode(res.toString());
@@ -50,7 +52,7 @@ class _CategoryPageState extends State<CategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Book Store'),
+        title: const Text('Categories'),
         centerTitle: true,
       ),
       body: categoryList.isEmpty
