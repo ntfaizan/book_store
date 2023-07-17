@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:book_store/pages/publisher_edit_page.dart';
 import 'package:flutter/material.dart';
 
 import '../models/publisher.dart';
@@ -33,6 +34,9 @@ class _PublisherPageState extends State<PublisherPage> {
             (m) => Publisher.fromJson(m),
           )
           .toList();
+      // order by publisher updatedAt
+      publisherList.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+      // publisherList.sort((a, b) => a.updatedAt.compareTo(b.updatedAt));
       setState(() {});
     }
   }
@@ -47,6 +51,18 @@ class _PublisherPageState extends State<PublisherPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Publishers'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => PublisherEditPage(initData: initData),
+                ),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       body: ListView.builder(
         itemCount: publisherList.length,

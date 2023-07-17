@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'pages/home_page.dart';
+import 'pages/publisher_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
           // useMaterial3: true,
         ),
         // home: const HomePage(),
-        home: const AuthorPage(),
+        // home: const AuthorPage(),
+        home: const PublisherPage(),
       ),
     );
   }
