@@ -1,12 +1,14 @@
-import 'package:book_store/pages/author_page.dart';
+import 'package:book_store/pages/category_page_rp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'pages/home_page.dart';
-import 'pages/publisher_page.dart';
-
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,9 +28,10 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
           // useMaterial3: true,
         ),
+        home: CategoryPageRp(),
         // home: const HomePage(),
         // home: const AuthorPage(),
-        home: const PublisherPage(),
+        // home: const PublisherPage(),
       ),
     );
   }
