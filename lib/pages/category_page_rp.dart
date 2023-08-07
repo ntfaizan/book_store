@@ -7,9 +7,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/category.dart';
 
 class CategoryPageRp extends ConsumerWidget {
-   CategoryPageRp({super.key});
+  CategoryPageRp({super.key});
 
-   List<String> coverList = [
+  List<String> coverList = [
     'assets/images/bBlack.jpg',
     'assets/images/bBlue.jpg',
     'assets/images/bBrown.jpg',
@@ -28,24 +28,31 @@ class CategoryPageRp extends ConsumerWidget {
     return Scaffold(
       body: ccProvider.when(
         data: (categoryList) => ListView.builder(
-              itemCount: categoryList.length,
-              itemBuilder: (context, index) => Card(
-                child: Row(
+          itemCount: categoryList.length,
+          itemBuilder: (context, index) => Card(
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () {
+                    ref
+                        .read(categoryControllerProvider.notifier)
+                        .deleteCategory(categoryList[index].id);
+                  },
+                  child: Image.asset(
+                    coverList[random.nextInt(7)],
+                  ),
+                ),
+                Column(
                   children: [
-                    Image.asset(
-                      coverList[random.nextInt(7)],
-                    ),
-                    Column(
-                      children: [
-                        Text(categoryList[index].name),
-                        Text(categoryList[index].createdAt),
-                        Text(categoryList[index].updatedAt),
-                      ],
-                    ),
+                    Text(categoryList[index].name),
+                    Text(categoryList[index].createdAt),
+                    Text(categoryList[index].updatedAt),
                   ],
                 ),
-              ),
+              ],
             ),
+          ),
+        ),
         error: (error, stackTrace) => Text('$stackTrace'),
         loading: () => const Center(child: CircularProgressIndicator()),
       ),
